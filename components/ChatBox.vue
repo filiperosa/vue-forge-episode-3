@@ -96,8 +96,10 @@ const usersTypingText = computed(() => {
         />
 
         <ChatBubble
+          v-if="usersTyping?.length"
           v-for="user in usersTyping"
           :user="user"
+          :key="user.id"
         >
           <AppLoading />
         </ChatBubble>
@@ -105,7 +107,7 @@ const usersTypingText = computed(() => {
 
       <footer class="p-2">
 
-        <div class="h-6 px-2 text-sm italic" v-if="usersTyping.length">{{ usersTypingText }}</div>
+        <div class="h-6 px-2 text-sm italic" v-if="usersTyping?.length">{{ usersTypingText }}</div>
 
         <input 
           type="text" 
