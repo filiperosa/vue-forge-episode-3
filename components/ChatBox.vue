@@ -86,6 +86,17 @@ const usersTypingText = computed(() => {
         </button>
       </header>
 
+      <div v-if="!messages.length" class="text-center w-[350px] m-auto pt-2">
+        <strong class="text-lg">Chat with Botman!</strong>
+        <p>Our A.I. powered assistant</p>
+        <strong class="block mt-10">Go ahead and ask us something:</strong>
+        <ul class="list-inside list-disc text-left">
+          <li>What is social media post generator?</li>
+          <li>How can I get human support?</li>
+          <li>How was this tool built?</li>
+        </ul>
+      </div>
+
       <div ref="messageBox" class="messages p-4 overflow-y-scroll max-h-[80vh]">
         <ChatBubble 
           v-for="message in messages"
