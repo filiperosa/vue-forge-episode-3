@@ -5,7 +5,6 @@ export default defineEventHandler(
         const { message } = await readBody(event)
         const session = await useSession(event, {password: "dngslkdgnfklsdngvklsdnfpsld34324b23m42-34c2gkfs"} )
         console.log("Session.id=" + session.id)
-        console.log("Session.data=" + session.data)
 
         //const key = session.id + ':messages'
         const messages = session.data.messages || []
