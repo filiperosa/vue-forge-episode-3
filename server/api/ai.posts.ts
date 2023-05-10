@@ -8,8 +8,7 @@ const system_msg = "You are a helpful Costumer support agent for an AI-powered s
 
 const training_msgs: ChatCompletionRequestMessage[] = [
     {role: "system", content: system_msg},
-    //{"role": "user", "content": system_msg},
-    //{"role": "assistant", "content": "Ok, I will ONLY answer questions related to 'Social media posts generator' application, and politely decline to answer other questions."},
+
     {role: "user", content: "What is your email?"},
     {role: "assistant", content: "My email is smpg.support@ecorp.com"},
     
