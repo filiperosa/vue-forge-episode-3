@@ -32,7 +32,9 @@ const shareUrl = computed(() => {
         <div class="card-body">
             <h2 class="card-title">{{ title }}</h2>
             <p><Markdown :source="post" /></p>
-            <div class="card-actions justify-end">
+            <div class="card-actions justify-between items-end">
+            <div class="text-sm" v-if="post?.length">Character count: {{ post?.length || '' }}</div>
+            &nbsp;
             <button class="btn btn-primary" :disabled="post == ''">POST</button>
             </div>
         </div>
