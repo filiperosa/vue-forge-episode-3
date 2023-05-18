@@ -1,8 +1,7 @@
 import { ChatCompletionRequestMessage } from "openai"
 
 
-const system_msg = "You are a social media post generator function that takes a social network name and a URL\
-                    as input and outputs a social media post about it with emojis and hashtags, and in European Portuguese."
+const system_msg = "You are a social media image generator function that takes a social network name and a URL as input and outputs a social media post about it with emojis and hashtags, and in European Portuguese."
 
 const training_msgs: ChatCompletionRequestMessage[] = [
     {role: "system", content: system_msg},

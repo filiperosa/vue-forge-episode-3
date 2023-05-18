@@ -9,6 +9,8 @@ const igpost = ref('')
 const articleUrl = ref('')
 const temperature = ref(1)
 
+const GENERATE_TIMEOUT = 20
+
 // catch emitted submit event from ImportUrlForm
 const onSubmit = (payload: Payload) => {
     articleUrl.value = payload.url
@@ -21,22 +23,34 @@ const onSubmit = (payload: Payload) => {
     generatePost("Instagram", igpost)
 }
 
+function timeout(seconds: number): Promise<never> {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error('Timeout exceeded'));
+    }, seconds * 1000);
+  });
+}
+
 async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
     post.value = "Loading"
     try {
-        const res = await $fetch('/api/generate', {
+        const res = await Promise.race([
+            $fetch('/api/generate', {
             method: 'POST',
             body: {
                 url: articleUrl.value,
                 temp: temperature.value,
                 socialApp: socialApp
-            }
-        })
+                }
+            })
+            ,
+            timeout(GENERATE_TIMEOUT)
+        ])
 
         post.value = res.content
 
     } catch (e) {
-        console.error(e)
+        post.value = "Failed to generate post"
     }
 }
 
