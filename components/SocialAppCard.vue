@@ -34,7 +34,7 @@ const shareUrl = computed(() => {
         case "LinkedIn":
             return `https://www.linkedin.com/sharing/share-offsite/?url=${props.articleUrl}`
         case "Instagram":
-            return `https://www.instagram.com/#?text=${props.post}`
+            return `https://www.instagram.com/#`
     }
 })
 
