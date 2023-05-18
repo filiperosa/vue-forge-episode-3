@@ -9,6 +9,7 @@ const props = defineProps<{
     title: SocialPlatform
     post?: string
     articleUrl?: string
+    regenerate: Function
 }>()
 
 const characterCount = computed(() => {
@@ -64,7 +65,10 @@ function share(): void {
             <div class="card-actions justify-between items-end">
             <div class="text-sm" v-if="post?.length && post != 'Loading'">Character count: {{ post?.length || '' }}</div>
             &nbsp;
-            <button class="btn btn-primary" :disabled="post == ''" @click="share">POST</button>
+            <div class="actions">
+                <button class="btn" :disabled="post == ''" @click="regenerate()">REGENERATE</button>
+                <button class="btn btn-primary ml-1" :disabled="post == ''" @click="share">POST</button>
+            </div>
             </div>
         </div>
     </div>

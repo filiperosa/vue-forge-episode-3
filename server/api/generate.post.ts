@@ -15,6 +15,8 @@ const training_msgs: ChatCompletionRequestMessage[] = [
 export default defineEventHandler( 
     async event => {
         const { url, temp, socialApp } = await readBody(event)
+        // Debug print
+        // console.log(`socialApp=${socialApp}, url=${url}, temp=${temp}`)
 
         const completion = await $openai.createChatCompletion({
             model: 'gpt-3.5-turbo',

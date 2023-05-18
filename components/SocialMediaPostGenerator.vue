@@ -1,10 +1,18 @@
 <script lang="ts" setup>
 import { Payload, SocialPlatform } from '~/types'
 
+// create refs for the posts and their regenerators
 const tweet = ref('')
+const tweetRegen = () => generatePost("Twitter", tweet)
+
 const fbpost = ref('')
+const fbRegen = () => generatePost("Facebook", fbpost)
+
 const ldpost = ref('')
+const ldRegen = () => generatePost("LinkedIn", ldpost)
+
 const igpost = ref('')
+const igRegen = () => generatePost("Instagram", igpost)
 
 const articleUrl = ref('')
 const temperature = ref(1)
@@ -33,6 +41,7 @@ function timeout(seconds: number): Promise<never> {
 
 async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
     post.value = "Loading"
+
     try {
         const res = await Promise.race([
             $fetch('/api/generate', {
@@ -46,7 +55,7 @@ async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
             ,
             timeout(GENERATE_TIMEOUT)
         ])
-
+        
         post.value = res.content
 
     } catch (e) {
@@ -64,10 +73,10 @@ async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
 
   <div class="ml-5 mr-5">
     <ImportUrlForm @submit="onSubmit" />
-    <SocialAppCard title="Twitter" :post="tweet" />
-    <SocialAppCard title="Facebook" :post="fbpost" :article-url="articleUrl"/>
-    <SocialAppCard title="LinkedIn" :post="ldpost" :article-url="articleUrl"/>
-    <SocialAppCard title="Instagram" :post="igpost" />
+    <SocialAppCard title="Twitter" :post="tweet" :regenerate="tweetRegen"/>
+    <SocialAppCard title="Facebook" :post="fbpost" :article-url="articleUrl" :regenerate="fbRegen"/>
+    <SocialAppCard title="LinkedIn" :post="ldpost" :article-url="articleUrl" :regenerate="ldRegen"/>
+    <SocialAppCard title="Instagram" :post="igpost" :regenerate="igRegen"/>
     <!-- Images Card Here -->
   </div>
 </template>
