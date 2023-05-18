@@ -10,7 +10,7 @@ const articleUrl = ref('')
 const temperature = ref(1)
 
 // catch emitted submit event from ImportUrlForm
-const onSubmit = (payload: any) => {
+const onSubmit = (payload: Payload) => {
     articleUrl.value = payload.url
     temperature.value = payload.temperature
 
@@ -22,6 +22,7 @@ const onSubmit = (payload: any) => {
 }
 
 async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
+    post.value = "Loading"
     try {
         const res = await $fetch('/api/generate', {
             method: 'POST',

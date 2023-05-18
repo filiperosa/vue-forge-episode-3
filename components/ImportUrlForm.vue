@@ -5,7 +5,6 @@ import { Payload } from '~/types';
 const url = ref('')
 const temperature = ref(1)
 
-
 const emit = defineEmits<{
     (event: 'submit', payload: Payload): void
 }>()
@@ -22,7 +21,6 @@ function submit(): void {
         temperature: temperature.value
     }
 
-    console.log("Emitting event:", payload)
     emit('submit', payload )
     url.value = ''
 }

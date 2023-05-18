@@ -2,6 +2,7 @@
 import { defineProps } from 'vue'
 import { SocialPlatform } from '~/types'
 import Markdown from 'vue3-markdown-it'
+import AppLoading from './AppLoading.vue'
 
 //define props
 const props = defineProps<{
@@ -56,9 +57,12 @@ function share(): void {
     <div class="card bg-base-100 shadow-xl border-t-2 border-primary mb-4">
         <div class="card-body">
             <h2 class="card-title">{{ title }}</h2>
-            <p><Markdown :source="post" /></p>
+            <p>
+                <AppLoading v-if="post == 'Loading'"/>
+                <Markdown v-else :source="post" />
+            </p>
             <div class="card-actions justify-between items-end">
-            <div class="text-sm" v-if="post?.length">Character count: {{ post?.length || '' }}</div>
+            <div class="text-sm" v-if="post?.length && post != 'Loading'">Character count: {{ post?.length || '' }}</div>
             &nbsp;
             <button class="btn btn-primary" :disabled="post == ''" @click="share">POST</button>
             </div>
