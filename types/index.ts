@@ -9,5 +9,11 @@ export interface Message {
   createdAt: Date;
   text: string;
 }
+
+export interface Payload{
+  url: string
+  temperature: number
+}
+
 export type AsyncState = null | "loading" | "error" | "complete";
-export type SocialPlatform = "Twitter" | "Facebook" | "LinkedIn";
+export type SocialPlatform = "Twitter" | "Facebook" | "LinkedIn" | "Instagram";

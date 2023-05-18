@@ -1,8 +1,45 @@
 <script lang="ts" setup>
+import { Payload, SocialPlatform } from '~/types'
 
-const tweet = ref("Just in: @virgingalactic successfully completes crewed flight of Unity 25. Space tourism is one step closer to reality! 🚀🪐 #VirginGalactic #CrewedFlight #SpaceTourism")
+const tweet = ref('')
 const fbpost = ref('')
 const ldpost = ref('')
+const igpost = ref('')
+
+const articleUrl = ref('')
+const temperature = ref(1)
+
+// catch emitted submit event from ImportUrlForm
+const onSubmit = (payload: any) => {
+    articleUrl.value = payload.url
+    temperature.value = payload.temperature
+
+    // generate the according posts
+    generatePost("Twitter", tweet)
+    generatePost("Facebook", fbpost)
+    generatePost("LinkedIn", ldpost)
+    generatePost("Instagram", igpost)
+}
+
+async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
+    try {
+        const res = await $fetch('/api/generate', {
+            method: 'POST',
+            body: {
+                url: articleUrl.value,
+                temp: temperature.value,
+                socialApp: socialApp
+            }
+        })
+
+        post.value = res.content
+
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+
 
 </script>
 
@@ -11,10 +48,11 @@ const ldpost = ref('')
   <!-- ImportUrlForm Here -->
 
   <div class="ml-5 mr-5">
-    <ImportUrlForm />
+    <ImportUrlForm @submit="onSubmit" />
     <SocialAppCard title="Twitter" :post="tweet" />
-    <SocialAppCard title="Facebook" :post="fbpost" />
-    <SocialAppCard title="LinkedIn" :post="ldpost" />
+    <SocialAppCard title="Facebook" :post="fbpost" :article-url="articleUrl"/>
+    <SocialAppCard title="LinkedIn" :post="ldpost" :article-url="articleUrl"/>
+    <SocialAppCard title="Instagram" :post="igpost" />
     <!-- Images Card Here -->
   </div>
 </template>
