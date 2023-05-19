@@ -39,7 +39,9 @@ export default defineEventHandler(
 
         const key = session.id + ':messages'
         const messages = (await storage.getItem (key)) as ChatCompletionRequestMessage[] || []
-        console.log({messages})
+        
+        // Debug msg history
+        // console.log({messages})
 
         messages.push({"role": "user", "content": message})
 

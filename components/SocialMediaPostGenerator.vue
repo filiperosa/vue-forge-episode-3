@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { Payload, SocialPlatform } from '~/types'
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 // create refs for the posts and their regenerators
 const tweet = ref('')
 const tweetRegen = () => generatePost("Twitter", tweet)
@@ -25,6 +28,7 @@ const onSubmit = (payload: Payload) => {
     temperature.value = payload.temperature
 
     // generate the according posts
+    toast.info('Generating posts')
     generatePost("Twitter", tweet)
     generatePost("Facebook", fbpost)
     generatePost("LinkedIn", ldpost)

@@ -4,6 +4,9 @@ import { SocialPlatform } from '~/types'
 import Markdown from 'vue3-markdown-it'
 import AppLoading from './AppLoading.vue'
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 //define props
 const props = defineProps<{
     title: SocialPlatform
@@ -16,13 +19,17 @@ const characterCount = computed(() => {
     return props.post?.length ?? 0
 })
 
+
+
 function copyToClipboard(text: string): void {
   navigator.clipboard.writeText(text)
     .then(() => {
-      console.log("Text copied to clipboard: " + text);
+      console.log("Text copied to clipboard: ")
+      toast.success('Text copied to clipboard')
     })
     .catch((error) => {
       console.error("Failed to copy text to clipboard:", error);
+      toast.error('Failed to copy text to clipboard' + error)
     });
 }
 
@@ -47,9 +54,19 @@ function share(): void {
     }
 
     console.log(`Opening ${shareUrl.value}`)
+    toast.info(`Opening ${shareUrl.value}`)
 
     // open the share url in a new tab
     window.open(shareUrl.value, '_blank')
+}
+
+function openInBackground(url: string): void {
+  const newTab = window.open(url, '_blank', 'noopener')
+  if (newTab) {
+    newTab.opener = null
+    newTab.blur()
+  }
+  window.focus()
 }
 
 </script>
