@@ -81,6 +81,7 @@ async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
     <SocialAppCard title="Facebook" :post="fbpost" :article-url="articleUrl" :regenerate="fbRegen"/>
     <SocialAppCard title="LinkedIn" :post="ldpost" :article-url="articleUrl" :regenerate="ldRegen"/>
     <SocialAppCard title="Instagram" :post="igpost" :regenerate="igRegen"/>
+    <ImageCard :article-url="articleUrl" />
     <!-- Images Card Here -->
   </div>
 </template>

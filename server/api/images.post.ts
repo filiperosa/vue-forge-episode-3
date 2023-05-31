@@ -1,32 +1,14 @@
-import { ChatCompletionRequestMessage } from "openai"
-
-
-const system_msg = "You are a social media image generator function that takes a social network name and a URL as input and outputs a social media post about it with emojis and hashtags, and in European Portuguese."
-
-const training_msgs: ChatCompletionRequestMessage[] = [
-    {role: "system", content: system_msg},
-
-    {role: "user", content: "{social network name}, {insert url here}"},
-    {role: "assistant", content: "{insert post here}"},
-    
-]
-
 export default defineEventHandler( 
     async event => {
-        const { url, temp, socialApp } = await readBody(event)
+        const { prompt_text } = await readBody(event)
 
-        const completion = await $openai.createChatCompletion({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                ...training_msgs,
-                {role: "user", content: `${socialApp}, ${url} ?`}
-            ],
-            temperature: Number(temp)
-        })
-
-
-        const response = completion.data.choices[0].message
-
-        return response
+        const response = await $openai.createImage({
+            prompt: prompt_text,
+            n: 4,
+            size: "1024x1024",
+          });
+          
+        // return image urls
+        return [response.data.data[0].url, response.data.data[1].url, response.data.data[2].url, response.data.data[3].url]
     }
 )
