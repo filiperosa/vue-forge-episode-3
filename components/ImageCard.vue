@@ -23,7 +23,7 @@ async function generatePrompt() {
         method: 'POST',
         body: {
             url: props.articleUrl,
-            temp: 0.9
+            temp: 0.8
         }
     })
     prompt.value = res.content
