@@ -1,7 +1,7 @@
 export default defineEventHandler( 
     async event => {
         const { prompt_text } = await readBody(event)
-
+        
         const response = await $openai.createImage({
             prompt: prompt_text,
             n: 4,
