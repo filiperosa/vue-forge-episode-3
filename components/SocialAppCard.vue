@@ -80,12 +80,12 @@ function openInBackground(url: string): void {
                 <Markdown v-else :source="post" />
             </p>
             <div class="card-actions justify-between items-end">
-            <div class="text-sm" v-if="post?.length && post != 'Loading'">Character count: {{ post?.length || '' }}</div>
-            &nbsp;
-            <div class="actions">
-                <button class="btn" :disabled="post == ''" @click="regenerate()">REGENERATE</button>
-                <button class="btn btn-primary ml-1" :disabled="post == ''" @click="share">POST</button>
-            </div>
+                <div class="text-sm" v-if="post?.length && post != 'Loading'">Character count: {{ post?.length || '' }}</div>
+                &nbsp;
+                <div class="actions">
+                    <button class="btn" :disabled="post == ''" @click="regenerate()">REGENERATE</button>
+                    <button class="btn btn-primary ml-1" :disabled="post == ''" @click="share">POST</button>
+                </div>
             </div>
         </div>
     </div>

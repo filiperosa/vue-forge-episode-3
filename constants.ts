@@ -1,2 +1,2 @@
-// export const LANGUAGE = "European Portuguese"
-export const LANGUAGE = "English"
+export const LANGUAGE = "Portuguese from Portugal"
+// export const LANGUAGE = "English"
