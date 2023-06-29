@@ -43,7 +43,7 @@ function isValidUrl(url: string): boolean {
             <input type="text" placeholder="Insert URL here" class="input input-bordered grow" v-model="url"/>
             <button class="btn btn-square w-fit pl-2 pr-2" @click="submit" :disabled="url == ''">GENERATE ANOUNCEMENTS</button>
         </div>
-        <input type="range" min="0" max="1" step="0.1" class="range range-secondary range-sm mt-1" v-model="temperature" />
+        <input type="range" min="0" max="1" step="0.1" class="range range-primary range-sm mt-1" v-model="temperature" />
         <label class="form-label text-s">Temperature: {{ temperature }}</label>
     </div>
 </template>

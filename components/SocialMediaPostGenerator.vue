@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Payload, SocialPlatform } from '~/types'
+// import { APP_NAME } from '~/constants'
 
 import { useToast } from 'vue-toastification'
 const toast = useToast()
@@ -72,19 +73,17 @@ async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
 </script>
 
 <template>
-  <div class="title-bar flex justify-between items-center">
-    <h1 class="text-4xl my-10">Social Media Post Generator</h1>
-    <!-- <Settings /> -->
-  </div>
-  <!-- ImportUrlForm Here -->
+  <!-- <div class="title-bar flex justify-between items-center">
+    <h1 class="text-4xl my-10">{{ APP_NAME }}</h1>
+    <Settings />
+  </div> -->
 
-  <div class="ml-5 mr-5">
+  <div class="ml-5 mr-5 pt-3">
     <ImportUrlForm @submit="onSubmit" />
     <SocialAppCard title="Twitter" :post="tweet" :regenerate="tweetRegen"/>
     <SocialAppCard title="Facebook" :post="fbpost" :article-url="articleUrl" :regenerate="fbRegen"/>
     <SocialAppCard title="LinkedIn" :post="ldpost" :article-url="articleUrl" :regenerate="ldRegen"/>
     <SocialAppCard title="Instagram" :post="igpost" :regenerate="igRegen"/>
     <ImageCard :article-url="articleUrl" />
-    <!-- Images Card Here -->
   </div>
 </template>
