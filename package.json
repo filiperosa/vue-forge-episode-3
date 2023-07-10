@@ -4,14 +4,8 @@
   "private": true,
   "main": "dist-electron/main.js",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "app:dir": "electron-builder --dir",
-    "app:dist": "electron-builder",
-    "electron": "nuxi build --prerender && electron-builder --win"
+    "dev": "nuxi dev",
+    "build": "nuxi build --prerender && electron-builder"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

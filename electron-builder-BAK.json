@@ -1,0 +1,26 @@
+{
+    "directories": {
+      "output": "dist-electron"
+    },
+    "appId": "famoplex.post.gen",
+    "mac": {
+      "category": "social",
+      "target": "default"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "filiperosa",
+        "repo": "vue-forge-episode-3.git",
+        "releaseType": "draft"
+      }
+    ]
+}
+
+  
