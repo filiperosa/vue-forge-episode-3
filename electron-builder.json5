@@ -9,7 +9,8 @@
   },
   "files": [
     ".output/**/*",
-    "dist-electron"
+    "dist-electron",
+    ".output/server",
   ],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",

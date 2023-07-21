@@ -22,14 +22,19 @@ watch(() => props.articleUrl, (newVal, oldVal) => {
 
 // generate image prompt
 async function generatePrompt() {
-    const res = await $fetch('/api/imageprompt', {
-        method: 'POST',
-        body: {
-            url: props.articleUrl,
-            temp: 0.8
-        }
+    // const res = await $fetch('/api/imageprompt', {
+    //     method: 'POST',
+    //     body: {
+    //         url: props.articleUrl,
+    //         temp: 0.8
+    //     }
+    // })
+    // prompt.value = res.content
+
+    window.electron.imagePrompt(props.articleUrl, 0.8).then((res) => {
+        prompt.value = res.content
+        console.log("Prompt is: " + prompt.value)
     })
-    prompt.value = res.content
 }
 
 // generate image
@@ -38,12 +43,15 @@ async function generateImage() {
     prompt.value += pattern.value ? ', display objects repeatedly forming a pattern' : ''
     prompt.value += !imageStyle.value.startsWith("Pick") ? `, ${imageStyle.value.toLowerCase()}` : ''
 
-    const res = await $fetch('/api/images', {
-        method: 'POST',
-        body: {
-            prompt_text: prompt.value,
-        }
-    })
+    // const res = await $fetch('/api/images', {
+    //     method: 'POST',
+    //     body: {
+    //         prompt_text: prompt.value,
+    //     }
+    // })
+
+    const res = await window.electron.generateImages(prompt.value)
+
     image_urls.value = res
     generating.value = false
 }
@@ -54,6 +62,8 @@ async function generate(){
 
     try {
         await generatePrompt()
+        const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms))
+        await sleep(1500)
         await generateImage()
     } catch (e) {
         console.log("Failed to generate images")

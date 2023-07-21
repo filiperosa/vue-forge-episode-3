@@ -5,7 +5,11 @@
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxi build --prerender && electron-builder"
+    "build": "nuxi build --prerender && electron-builder",
+    "clean": "nuxi cleanup",
+    "preview": "nuxi preview",
+    "postinstall": "electron-builder install-app-deps",
+    "yolo": "nuxt build"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
@@ -19,8 +23,10 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.4",
+    "@types/keytar": "^4.4.2",
     "@vueuse/nuxt": "^9.13.0",
     "daisyui": "^2.51.5",
+    "electron-store": "^8.1.0",
     "html-to-image": "^1.11.11",
     "nanoid": "^4.0.1",
     "openai": "^3.2.1",

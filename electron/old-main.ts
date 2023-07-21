@@ -2,6 +2,14 @@ import { app, BrowserWindow } from 'electron'
 import { fork } from 'child_process'
 import path from 'path'
 
+// import { createServer } from 'http';
+// import { Nuxt, Builder } from 'nuxt';
+// const nuxtConfig = require('./nuxt.config.js') as NuxtConfig;
+// const nuxt = new Nuxt(nuxtConfig);
+// new Builder(nuxt).build();
+// const server = createServer(nuxt.render);
+// server.listen(3000, 'localhost');
+
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -11,7 +19,6 @@ import path from 'path'
 // │ │ └── index.js
 // │ ├─┬ renderer
 // │ │ └── index.html
-
 
 process.env.ROOT = path.join(__dirname, '..')
 process.env.DIST = path.join(process.env.ROOT, 'dist-electron')
@@ -30,7 +37,7 @@ function bootstrap() {
     webPreferences: {
       preload,
       nodeIntegrationInWorker: true,
-      contextIsolation: true,
+      contextIsolation: false,
       nodeIntegration: true,
       webSecurity: false,
     },
@@ -42,6 +49,12 @@ function bootstrap() {
   } else {
     win.loadFile(path.join(process.env.VITE_PUBLIC!, 'index.html'))
   }
+
+  // const entryPoint = '.output/server/index.mjs'
+  // fork(entryPoint)
+  // //win.loadFile('.output/public/index.html')
+  // win.loadURL('http://[::]:3000')
+  // console.log("LOADING FILE: "+entryPoint)
 }
 
 app.whenReady().then(bootstrap)

@@ -49,14 +49,15 @@ async function generatePost(socialApp: SocialPlatform, post: Ref<string>) {
 
     try {
         const res = await Promise.race([
-            $fetch('/api/generate', {
-            method: 'POST',
-            body: {
-                url: articleUrl.value,
-                temp: temperature.value,
-                socialApp: socialApp
-                }
-            })
+            // $fetch('/api/generate', {
+            // method: 'POST',
+            // body: {
+            //     url: articleUrl.value,
+            //     temp: temperature.value,
+            //     socialApp: socialApp
+            //     }
+            // })
+            window.electron.generatePost(articleUrl.value, temperature.value, socialApp)
             ,
             timeout(GENERATE_TIMEOUT)
         ])
